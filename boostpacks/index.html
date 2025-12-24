@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nex Divu - Pacotes de Divulgação</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23c41e3a'/><polygon points='50,5 35,35 65,35' fill='%23c41e3a'/><circle cx='50' cy='5' r='8' fill='%23fff'/><text x='50' y='65' text-anchor='middle' font-size='28' font-weight='bold' fill='%23f8f8f7'>ND</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1E1E1E;
+            color: #f8f8f7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .snowflakes { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
+        .snowflake { position: absolute; top: -10px; color: #fff; font-size: 1em; animation: fall linear infinite; opacity: 0.8; }
+        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+        header { text-align: center; padding: 40px 20px; }
+        .logo { font-size: 3rem; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; }
+        .logo span { background: linear-gradient(135deg, #c41e3a, #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .santa-hat { font-size: 2.5rem; margin-left: -15px; transform: rotate(15deg); display: inline-block; }
+        .tagline { margin-top: 15px; font-size: 1.1rem; opacity: 0.9; }
+
+        .packages { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 40px 0; }
+
+        .card {
+            background: #2C2C2C;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .card.bronze { border-color: #cd7f32; }
+        .card.prata { border-color: #c0c0c0; }
+        .card.ouro { border-color: #ffd700; }
+        .card.platina { border-color: #e5e4e2; }
+        .card.diamante { border-color: #b9f2ff; background: linear-gradient(135deg, #2C2C2C, #3a3a4a); }
+
+        .card-icon { font-size: 3rem; margin-bottom: 15px; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        .card .price { font-size: 2.2rem; font-weight: 700; margin: 15px 0; }
+        .card ul { list-style: none; text-align: left; margin: 20px 0; }
+        .card li { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.95rem; }
+        .card li:last-child { border: none; }
+        .card li::before { content: "✔️ "; }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: #fff;
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
+
+        .rules { background: #2C2C2C; border-radius: 20px; padding: 30px; margin: 40px 0; }
+        .rules h2 { text-align: center; margin-bottom: 20px; font-size: 1.8rem; }
+        .rules ul { list-style: none; max-width: 600px; margin: 0 auto; }
+        .rules li { padding: 10px 0; font-size: 1rem; }
+
+        footer { text-align: center; padding: 30px; opacity: 0.7; font-size: 0.9rem; }
+
+        @media (max-width: 600px) {
+            .logo { font-size: 2rem; }
+            .santa-hat { font-size: 1.8rem; }
+            .card .price { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="snowflakes" id="snowflakes"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span>Nex Divu</span>
+                <span class="santa-hat">🎅</span>
+            </div>
+            <p class="tagline">✨ Pacotes de Divulgação – Grupo Slot / Casa de Aposta ✨<br>Crescimento real com agentes, blogueiros e pessoas ativas no nicho.</p>
+        </header>
+
+        <section class="packages">
+            <div class="card bronze">
+                <div class="card-icon">🥉</div>
+                <h3>BRONZE</h3>
+                <div class="price">R$ 99</div>
+                <ul>
+                    <li>Divulgação básica em grupos parceiros</li>
+                    <li>Duração média: 3 dias</li>
+                    <li>Ideal para começar</li>
+                </ul>
+                <a href="https://wa.me/553496476084?text=Olá! Tenho interesse no pacote BRONZE - R$ 99" class="btn">Comprar Agora</a>
+            </div>
+
+            <div class="card prata">
+                <div class="card-icon">🥈</div>
+                <h3>PRATA</h3>
+                <div class="price">R$ 199</div>
+                <ul>
+                    <li>Divulgação em grupos maiores e ativos</li>
+                    <li>Indicação para agentes iniciantes e micro-blogueiros</li>
+                    <li>Duração média: 5 dias</li>
+                </ul>
+                <a href="https://wa.me/553496476084?text=Olá! Tenho interesse no pacote PRATA - R$ 199" class="btn">Comprar Agora</a>
+            </div>
+
+            <div class="card ouro">
+                <div class="card-icon">🥇</div>
+                <h3>OURO</h3>
+                <div class="price">R$ 349</div>
+                <ul>
+                    <li>Divulgação estratégica em grupos selecionados</li>
+                    <li>Indicação para agentes ativos e blogueiros médios</li>
+                    <li>Duração média: 7 dias</li>
+                </ul>
+                <a href="https://wa.me/553496476084?text=Olá! Tenho interesse no pacote OURO - R$ 349" class="btn">Comprar Agora</a>
+            </div>
+
+            <div class="card platina">
+                <div class="card-icon">💎</div>
+                <h3>PLATINA</h3>
+                <div class="price">R$ 599</div>
+                <ul>
+                    <li>Divulgação em grupos premium e nichados</li>
+                    <li>Indicação direta para grandes agentes</li>
+                    <li>Duração média: 10 dias</li>
+                </ul>
+                <a href="https://wa.me/553496476084?text=Olá! Tenho interesse no pacote PLATINA - R$ 599" class="btn">Comprar Agora</a>
+            </div>
+
+            <div class="card diamante">
+                <div class="card-icon">👑</div>
+                <h3>DIAMANTE</h3>
+                <div class="price">R$ 899</div>
+                <ul>
+                    <li>Divulgação máxima e personalizada</li>
+                    <li>Indicação para influenciadores do nicho</li>
+                    <li>Duração média: 15 dias</li>
+                </ul>
+                <a href="https://wa.me/553496476084?text=Olá! Tenho interesse no pacote DIAMANTE - R$ 899" class="btn">Comprar Agora</a>
+            </div>
+        </section>
+
+        <section class="rules">
+            <h2>📌 Regras</h2>
+            <ul>
+                <li>✔️ Permitida divulgação de link de grupo e plataforma</li>
+                <li>✔️ Foco em crescimento orgânico e público qualificado</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>© 2024 Nex Divu - Todos os direitos reservados 🎄</p>
+        </footer>
+    </div>
+
+    <script>
+        const container = document.getElementById('snowflakes');
+        const snowflakes = ['❄', '❅', '❆', '✦', '•'];
+        
+        function createSnowflake() {
+            const flake = document.createElement('div');
+            flake.className = 'snowflake';
+            flake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+            flake.style.left = Math.random() * 100 + 'vw';
+            flake.style.fontSize = (Math.random() * 1 + 0.5) + 'em';
+            flake.style.opacity = Math.random() * 0.6 + 0.4;
+            flake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            container.appendChild(flake);
+            setTimeout(() => flake.remove(), 10000);
+        }
+        
+        setInterval(createSnowflake, 200);
+        for(let i = 0; i < 30; i++) setTimeout(createSnowflake, i * 100);
+    </script>
+</body>
+</html>
