@@ -4,93 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nex Divu - Pacotes de Divulgação</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23c41e3a'/><polygon points='50,15 25,45 75,45' fill='white' /><circle cx='50' cy='10' r='10' fill='white' /><text x='50' y='65' text-anchor='middle' font-size='28' font-weight='bold' fill='%23f8f8f7'>ND</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #1E1E1E;
-            color: #f8f8f7;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .snowflakes { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
-        .snowflake { position: absolute; top: -10px; color: #fff; font-size: 1em; animation: fall linear infinite; opacity: 0.8; }
-        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
-
-        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 20px; }
-
-        header { text-align: center; padding: 40px 20px; }
-        .logo { font-size: 3rem; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; }
-        .logo span { background: linear-gradient(135deg, #c41e3a, #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .santa-hat { 
-            width: 50px;
-            height: 50px;
-            margin-left: -15px;
-            transform: rotate(15deg);
-        }
-        .tagline { margin-top: 15px; font-size: 1.1rem; opacity: 0.9; }
-        .tagline strong { color: #ff6b6b; }
-
-        .packages { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 40px 0; }
-
-        .card {
-            background: #2C2C2C;
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 2px solid transparent;
-        }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .card.grupo { border-color: #3498db; }
-        .card.site { border-color: #9b59b6; }
-        .card.bot { border-color: #2ecc71; }
-        .card.bronze { border-color: #cd7f32; }
-        .card.prata { border-color: #c0c0c0; }
-        .card.ouro { border-color: #ffd700; }
-        .card.platina { border-color: #e5e4e2; }
-        .card.diamante { border-color: #b9f2ff; background: linear-gradient(135deg, #2C2C2C, #3a3a4a); }
-
-        .card-icon { font-size: 3rem; margin-bottom: 15px; }
-        .card h3 { font-size: 1.5rem; margin-bottom: 10px; }
-        .card .price { font-size: 2.2rem; font-weight: 700; margin: 15px 0; }
-        .card ul { list-style: none; text-align: left; margin: 20px 0; padding-left: 10px; }
-        .card li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.95rem; }
-        .card li:last-child { border: none; }
-        .card li::before { content: "✅ "; padding-right: 5px; }
-
-        .btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #25d366, #128c7e);
-            color: #fff;
-            padding: 14px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
-
-        .rules { background: #2C2C2C; border-radius: 20px; padding: 30px; margin: 40px 0; }
-        .rules h2 { text-align: center; margin-bottom: 20px; font-size: 1.8rem; }
-        .rules ul { list-style: none; max-width: 700px; margin: 0 auto; padding-left: 10px; }
-        .rules li { padding: 12px 0; font-size: 1rem; }
-        .rules li::before { content: "➡️ "; padding-right: 8px; }
-
-        footer { text-align: center; padding: 30px; opacity: 0.7; font-size: 0.9rem; }
-
-        @media (max-width: 600px) {
-            .logo { font-size: 2.5rem; }
-            .santa-hat { width: 40px; height: 40px; }
-            .card .price { font-size: 2rem; }
-            .tagline { font-size: 1rem; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="favicon.js"></script>
 </head>
 <body>
     <div class="snowflakes" id="snowflakes"></div>
@@ -99,11 +15,7 @@
         <header>
             <div class="logo">
                 <span>Nex Divu</span>
-                <svg class="santa-hat" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20,70 C20,50 80,50 80,70 L95,90 L5,90 Z" fill="#c41e3a"/>
-                    <circle cx="50" cy="30" r="25" fill="white"/>
-                    <path d="M5,90 A45,45 0 0,1 95,90" fill="white"/>
-                </svg>
+                <img src="../1004729129-removebg-preview.png" alt="Chapéu de Papai Noel" class="santa-hat">
             </div>
             <p class="tagline">Impulsione seu sucesso com nossos pacotes de divulgação! 🚀<br>Alcance o público certo com <strong>agentes, blogueiros e os melhores grupos do nicho.</strong></p>
         </header>
