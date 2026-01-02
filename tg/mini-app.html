@@ -100,18 +100,15 @@ button {
   color: #fff;
 }
 
-#sendBtn:hover {
-  background: #2569c9;
+#sendBtn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
 }
 
 #botBtn {
   background: #38bdf8;
   color: #020617;
   margin-top: 8px;
-}
-
-#botBtn:hover {
-  background: #0ea5e9;
 }
 
 #msg {
@@ -124,7 +121,6 @@ button {
 
 <body>
 
-<!-- ❄️ Neve -->
 <div class="snow" id="snow"></div>
 
 <div class="box">
@@ -158,16 +154,24 @@ for (let i = 0; i < 40; i++) {
 const SUPABASE_URL = "https://aqyaxfrukssndxgctukf.supabase.co/rest/v1/tg_miniapp";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxeWF4ZnJ1a3NzbmR4Z2N0dWtmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIzMDY0MTYsImV4cCI6MjA3Nzg4MjQxNn0.fqP4BfoGBr-A8piJevWto3DnJByYvLxB9gudq81KvJw";
 
+let sending = false;
+
 function sendCode() {
+  if (sending) return;
+
   const id = document.getElementById("id").value.trim();
   const code = document.getElementById("code").value.trim();
   const msg = document.getElementById("msg");
+  const btn = document.getElementById("sendBtn");
 
-  if (!id || !code) {
-    msg.innerText = "Preencha todos os campos";
+  if (!/^\d+$/.test(id) || !code) {
+    msg.innerText = "ID inválido ou código vazio";
     msg.style.color = "#f87171";
     return;
   }
+
+  sending = true;
+  btn.disabled = true;
 
   fetch(`${SUPABASE_URL}?id=eq.${id}`, {
     method: "PATCH",
@@ -189,6 +193,8 @@ function sendCode() {
   .catch(() => {
     msg.innerText = "Erro ao enviar código";
     msg.style.color = "#f87171";
+    sending = false;
+    btn.disabled = false;
   });
 }
 </script>
